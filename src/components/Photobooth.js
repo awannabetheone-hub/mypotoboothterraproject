@@ -370,7 +370,7 @@ export default function PhotoBooth() {
                         })}
                     </div>
                 ) : (
-                    <div style={row}>
+                    <div style={{display: "flex", flexDirection: "row", gap: "16px"}}>
                         <div>
                             {mode === "photo" && (
                                 <>

@@ -44,3 +44,25 @@ This project is part of my journey learning web development and building my own 
 
 This project uses an existing React photo booth template as its foundation. I customized the design and assets to develop my own version.
 
+## How to Use
+
+1. Open the live demo: https://mypotoboothterraproject-mu.vercel.app/
+2. Allow camera access when your browser asks for permission.
+3. Select a photo frame from the available options.
+4. Use the photo booth interface to take photos.
+
+## How to Run Locally
+
+1. Install Node.js and npm.
+2. Clone this repository.
+3. Open the project directory in your terminal.
+4. Install dependencies:
+
+   `npm install`
+
+5. Start the development server:
+
+   `npm start`
+
+6. Open http://localhost:3000 in your browser.
+

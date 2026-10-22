@@ -2,15 +2,18 @@ import React, { useRef, useState, useEffect, useCallback } from "react";
 import Webcam from "react-webcam";
 
 const frameOptions = [
-    "/assets/frames/myframe1.png",
+    "/assets/frames/miframe1.png",
     "/assets/frames/heart-frame-2.png",
     "/assets/frames/heart-frame-3.png",
-    "/assets/frames/myframe2.png",
+    "/assets/frames/miframe2.png",
 ];
 
 const stickerOptions = [
     "/assets/stickers/leaf.png",
-    "/assets/stickers/sparkles.png"
+    "/assets/stickers/sparkles.png",
+    "/assets/stickers/stiker1.png",
+    "/assets/stickers/stiker2.png",
+    "/assets/stickers/stiker3.png"
 ];
 
 const videoConstraints = { width: 953, height: 599, facingMode: "user" };
@@ -38,7 +41,6 @@ export default function PhotoBooth() {
     const [draggingPhoto, setDraggingPhoto] = useState(null);
     const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
     const [countdown, setCountdown] = useState(null);
-
     const [stickers, setStickers] = useState([]);
     const [draggingSticker, setDraggingSticker] = useState(null);
     const [selectedSticker, setSelectedSticker] = useState(null);

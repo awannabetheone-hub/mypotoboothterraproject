@@ -371,11 +371,11 @@ export default function PhotoBooth({ selectedFrame, setSelectedFrame}) {
                         })}
                     </div>
                 ) : (
-                    <div style={{ display: "flex", gap: 24 }}>
+                    <div className="booth-layout" style={{ display: "flex", gap: 24 }}>
                         <div>
                             {mode === "photo" && (
                                 <>
-                                    <div style= {{position: "relative", width: 400 }}>
+                                    <div style= {{position: "relative", width: "min(400px, calk(100vw - 32px))", }}>
                                         {/* Webcam */}
                                         <Webcam
                                             audio={false}
@@ -535,7 +535,7 @@ const titleBar = {
 
 const mainContent = {
     height: 600, // fixed content height
-    width: 700,
+    width: "min(700px, calc(100vw - 32px))",
     display: "flex",
     justifyContent: "center",
     alignItems: "flex-start",

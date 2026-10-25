@@ -3,8 +3,8 @@ import Webcam from "react-webcam";
 
 const frameOptions = [
     "/assets/frames/miframe1.png",
-    "/assets/frames/heart-frame-2.png",
-    "/assets/frames/heart-frame-3.png",
+    "/assets/frames/miframe4.png",
+    "/assets/frames/miframe3.png",
     "/assets/frames/miframe2.png",
 ];
 

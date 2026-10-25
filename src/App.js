@@ -1,5 +1,5 @@
 import './App.css';
-import React, { usestate } from "react";
+import React, { useState } from "react";
 import Photobooth from "./components/Photobooth";
 import "./styles/global.css"
 const logoSrc = "/assets/logo/mylogo.png";
@@ -8,11 +8,11 @@ function App() {
   const [selectedFrame, setSelectedFrame] =useState(null);
   return (
     <div className="App" style={{
-      backgroundColor: "#f7cbad",
-      backgrondImage:
+      backgroundColor: " #fff8f0",
+      backgroundImage:
       selectedFrame === "/assets/frames/miframe1.png"
-      ? "linear-gradient(90deg, rgba(190,0,0,0.25) 50%, rgba(190,0,0,0.25) 50%)"
-      : "none",
+        ? "linear-gradient(90deg,  rgba(190, 0, 0, 0.22) 50%, transparent 50%), linear-gradient(rgba(190, 0, 0, 0.22),50%, transparent 50%)"
+        : "none",
       backgroundSize: "40px 40px",
       minHeight: "100vh",
       display: "flex",
@@ -47,8 +47,12 @@ function App() {
       }}
       >
 
-      <Photobooth />
-
+      <Photobooth 
+      selectedFrame={selectedFrame}
+      setSelectedFrame={setSelectedFrame}
+      
+      />
+      
       </div>
     </div>
   );

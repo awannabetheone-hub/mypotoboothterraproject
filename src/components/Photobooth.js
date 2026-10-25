@@ -27,12 +27,11 @@ const slots = [
 ];
 
 
-export default function PhotoBooth() {
+export default function PhotoBooth({ selectedFrame, setSelectedFrame}) {
     const webcamRef = useRef(null);
     const canvasRef = useRef(null);
     const frameImgRef = useRef(null);
 
-    const [selectedFrame, setSelectedFrame] = useState(null);
     const [mode, setMode] = useState("photo");
 
     const [photos, setPhotos] = useState([]);
@@ -341,7 +340,7 @@ export default function PhotoBooth() {
             </div>
             <div style={mainContent} >
                 {!selectedFrame ? (
-                    <div style={{ display: "flex", gap: 24 }}>
+                    <div className="frame-options" style={{ display: "flex", gap: 24 }}>
                         {frameOptions.map((src) => {
                             const isSelected = selectedFrame === src;
 
@@ -372,7 +371,7 @@ export default function PhotoBooth() {
                         })}
                     </div>
                 ) : (
-                    <div style={{display: "flex", flexDirection: "row", gap: "16px"}}>
+                    <div style={{ display: "flex", gap: 24 }}>
                         <div>
                             {mode === "photo" && (
                                 <>

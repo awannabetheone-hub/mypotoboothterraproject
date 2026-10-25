@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Red gingham background preview</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: #8c5b4a;
+      font-family: Arial, sans-serif;
+      background-color: #f7cbad;
+      background-image:
+        linear-gradient(90deg, rgba(190, 0, 0, .22) 50%, transparent 50%),
+        linear-gradient(rgba(190, 0, 0, .22) 50%, transparent 50%);
+      background-size: 40px 40px;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 28px 6vw;
+      font-size: clamp(20px, 3vw, 34px);
+      font-weight: 700;
+    }
+    header img { width: 76px; height: 54px; object-fit: contain; }
+    main { padding: 28px 20px 54px; text-align: center; }
+    h1 { font-size: clamp(22px, 3vw, 34px); margin: 8px 0 44px; }
+    .frames {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      gap: clamp(12px, 2vw, 28px);
+      flex-wrap: wrap;
+    }
+    .frames img {
+      width: clamp(130px, 14vw, 190px);
+      height: auto;
+      max-height: 490px;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 9px 18px rgba(84, 48, 30, .24);
+    }
+    .note { margin-top: 32px; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="public/assets/logo/mylogo.png" alt="">
+    <span>MyPotoboothterraproject</span>
+  </header>
+  <main>
+    <h1>now choose a frame!!</h1>
+    <div class="frames">
+      <img src="public/assets/frames/miframe1.png" alt="Red frame">
+      <img src="public/assets/frames/heart-frame-2.png" alt="Heart frame">
+      <img src="public/assets/frames/heart-frame-3.png" alt="Love frame">
+      <img src="public/assets/frames/miframe2.png" alt="Decorated frame">
+    </div>
+    <p class="note">Preview: the page background after choosing the red frame</p>
+  </main>
+</body>
+</html>

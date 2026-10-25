@@ -383,8 +383,12 @@ export default function PhotoBooth({ selectedFrame, setSelectedFrame}) {
                                             screenshotFormat="image/png"
                                             videoConstraints = {videoConstraints}
                                             mirrored = {true}
-                                            style={{ width: "100%", borderRadius: 12}}
-                                            />
+                                            style={{
+                                                 width: "100%", 
+                                                 height: "auto",
+                                                objectFit: "contain",
+                                                borderRadius: 12
+                                                                                       }}                                           />
 
                                         {/* Overlay countdown */}
 

@@ -8,10 +8,13 @@ function App() {
   const [selectedFrame, setSelectedFrame] =useState(null);
   return (
     <div className="App" style={{
-      backgroundColor: " #fff8f0",
+       backgroundColor:
+      selectedFrame === "/assets/frames/miframe1.png" ?"#f7cbad" :"#fff8f0",
       backgroundImage:
       selectedFrame === "/assets/frames/miframe1.png"
         ? "linear-gradient(90deg,  rgba(190, 0, 0, 0.22) 50%, transparent 50%), linear-gradient(rgba(190, 0, 0, 0.22),50%, transparent 50%)"
+       : selectedFrame === "/assets/frames/miframe2.png"
+        ? "radial-gradient(circle, #ef4747 0 4px,transparent 4.5px), radial-gradient(circle, #a3ed98 0 4px,transparent 4.5px), radial-gradient(circle, #32b24c 0 4px, transparent 4.5px) "
         : "none",
       backgroundSize: "40px 40px",
       minHeight: "100vh",

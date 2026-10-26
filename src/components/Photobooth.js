@@ -11,9 +11,9 @@ const frameOptions = [
 const filterOptions = [
     {name :"Original", value:"none"},
     {name: "B&W", value: "grayscale(1)"},
-    {name: "Warn", value:"sepia(0.5) saturate(1.3)"},
+    {name: "Warm", value:"sepia(0.5) saturate(1.3)"},
     {name :"vintage", value: "contrast(1.1) sepia(0.4) brightness(1.07)"},
-    {name: "cool", value:"saturate(0,79) hue-rotate(12deg)"}
+    {name: "cool", value:"saturate(0.9) hue-rotate(12deg)"}
 ];
 const stickerOptions = [
     "/assets/stickers/leaf.png",
@@ -22,6 +22,7 @@ const stickerOptions = [
     "/assets/stickers/stiker2.png",
     "/assets/stickers/stiker3.png"
 ];
+
 
 const videoConstraints = { width: 953, height: 599, facingMode: "user" };
 const SLOT_WIDTH = 953;
@@ -40,7 +41,7 @@ export default function PhotoBooth({ selectedFrame, setSelectedFrame}) {
     const frameImgRef = useRef(null);
 
     const [mode, setMode] = useState("photo");
-
+const [selectedFilter, setSelectedFilter] = useState("none");
     const [photos, setPhotos] = useState([]);
     const [photoCount, setPhotoCount] = useState(0);
     const [canTakePhoto, setCanTakePhoto] = useState(true);
@@ -76,10 +77,12 @@ export default function PhotoBooth({ selectedFrame, setSelectedFrame}) {
             ctx.beginPath();
             ctx.rect(slot.x, slot.y, SLOT_WIDTH, SLOT_HEIGHT);
             ctx.clip();
+            ctx.filter = p.filter;
             ctx.drawImage(p.img, dx, dy, drawW, drawH);
             ctx.restore();
         });
-                ctx.drawImage(frameImgRef.current, 0, 0, frameWidth, frameHeight);
+         
+        ctx.drawImage(frameImgRef.current, 0, 0, frameWidth, frameHeight);
 
         stickers.forEach((s, i) => {
             ctx.drawImage(s.img, s.x, s.y, s.size, s.size);
@@ -123,7 +126,8 @@ export default function PhotoBooth({ selectedFrame, setSelectedFrame}) {
     };
 
     // photos
-    const addPhoto = img => {
+    const addPhoto = (img, filter = selectedFilter) => {
+        
         if (photoCount >= 4) return;
 
         const scale = SLOT_WIDTH / img.width;
@@ -406,8 +410,11 @@ export default function PhotoBooth({ selectedFrame, setSelectedFrame}) {
                                                  width: "100%", 
                                                  height: "auto",
                                                 objectFit: "contain",
-                                                borderRadius: 12
+                                                borderRadius: 12,
+                                                filter: selectedFilter
                                                                                        }}                                           />
+
+
 
                                         {/* Overlay countdown */}
 
@@ -431,6 +438,25 @@ export default function PhotoBooth({ selectedFrame, setSelectedFrame}) {
                                                 </div>
                                         )}
                                     </div>
+
+<div role="group" aria-label="Photo filters" style={{display: "flex", gap: 8, marginTop: 12}}>
+                                            {filterOptions.map((filter) => (
+                                                <button
+                                                    key={filter.name}
+                                                    aria-pressed={selectedFilter === filter.value}
+                                                    onClick={() => setSelectedFilter(filter.value)}
+                                                    style={{
+                                                        ...buttonStyle,
+                                                
+                                                        backgroundColor: selectedFilter === filter.value ? "#6f0c2a" : "#241a73",
+                                                        color: selectedFilter === filter.value ? "white" : "black",
+                                                        cursor: "pointer",
+                                                    }}
+                                                >
+                                                    {filter.name}
+                                                </button>
+                                            ))}
+                                        </div>
 
                                     {/* Buttons */}
                                     <div style = {{marginTop: 16, display: "flex", gap:12}}>

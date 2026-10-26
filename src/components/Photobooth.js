@@ -8,6 +8,13 @@ const frameOptions = [
     "/assets/frames/miframe2.png",
 ];
 
+const filterOptions = [
+    {name :"Original", value:"none"},
+    {name: "B&W", value: "grayscale(1)"},
+    {name: "Warn", value:"sepia(0.5) saturate(1.3)"},
+    {name :"vintage", value: "contrast(1.1) sepia(0.4) brightness(1.07)"},
+    {name: "cool", value:"saturate(0,79) hue-rotate(12deg)"}
+];
 const stickerOptions = [
     "/assets/stickers/leaf.png",
     "/assets/stickers/sparkles.png",
@@ -75,11 +82,11 @@ export default function PhotoBooth({ selectedFrame, setSelectedFrame}) {
                 ctx.drawImage(frameImgRef.current, 0, 0, frameWidth, frameHeight);
 
         stickers.forEach((s, i) => {
-            ctx.drawImage(s.img, s.x, s.y, 150, 150);
+            ctx.drawImage(s.img, s.x, s.y, s.size, s.size);
             if (i === selectedSticker) {
-                ctx.strokeStyle = "#ff7aa2";
-                ctx.lineWidth = 4;
-                ctx.strokeRect(s.x, s.y, 150, 150);
+                ctx.strokeStyle = "#fcfcfc11";
+                ctx.lineWidth= 4; 
+                ctx.strokeRect(s.x, s.y, s.size, s.size);
             }
         });
     }, [photos, stickers, selectedSticker]);
@@ -225,7 +232,7 @@ export default function PhotoBooth({ selectedFrame, setSelectedFrame}) {
         if (mode === "decorate") {
             for(let i = stickers.length - 1; i >= 0; i --){
                 const s = stickers[i];
-                if (x >= s.x && x <= s.x + 150 && y>= s.y && y <= s.y + 150) {
+                if (x >= s.x && x <= s.x + s.size && y>= s.y && y <= s.y + s.size) {
                     setDraggingSticker(i);
                     setSelectedSticker(i);
                     setDragOffset({x: x-s.x, y: y-s.y});
@@ -274,11 +281,23 @@ export default function PhotoBooth({ selectedFrame, setSelectedFrame}) {
     };
 
     // add Sticker
+    const resizeSelectedSticker = amount =>{
+        if (selectedSticker === null) return;
+
+        setStickers (current =>
+            current.map((sticker, index) =>
+    
+                index === selectedSticker 
+                ? {...sticker, size: Math.min(400, Math.max(40, sticker.size + amount))}
+                 : sticker
+            )
+        );
+    };
     const addSticker = src => {
         const img = new Image();
         img.src = src;
         img.onload = () =>
-            setStickers(s => [...s, {img, x: 400, y: 100}]);
+            setStickers(s => [...s, {img, x: 400, y: 100, size:150}]);
     };
 
     // delete Sticker
@@ -449,18 +468,39 @@ export default function PhotoBooth({ selectedFrame, setSelectedFrame}) {
                             )}
 
                             {mode === "decorate" && (
-                                stickerOptions.map((src) => (
+                                <div style={{display: "flex", flexDirection: "column", gap: 8}}>
+                                {stickerOptions.map((src) => (
                                     <img
                                         key={src}
                                         src={src}
                                         alt="sticker"
                                         onClick={() => addSticker(src)}
-                                        style={{ width: 50, cursor: "pointer"}}
-                                    />
-                                ))
+                                        style={{ width: 50, cursor: "pointer"}} 
+                                        />
+                                ))}
+                                  {selectedSticker !== null&& (
+                                    <div style={{display: "flex", gap:8}}  >
+                                        <button 
+                                    type="button"
+                                        style={buttonStyle}
+                                        onClick={() => resizeSelectedSticker(-20)}
+                                        >
+                                            -
+                            </button> 
+                            <button
+                            type="button"
+                            style={buttonStyle}
+                            onClick={() => resizeSelectedSticker(20)}
+                            >
+                                +
+                            </button>
+                            </div>
+                                  )}
+                           </div>
+                            )} 
+                           </div>
                             )
-                            }
-                        </div>
+                    
 
                         {/* Display frame */}
                             <div>

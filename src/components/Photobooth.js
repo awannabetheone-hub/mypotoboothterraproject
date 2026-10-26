@@ -136,7 +136,7 @@ const [selectedFilter, setSelectedFilter] = useState("none");
 
         setPhotos(p => [
             ...p,
-            { img, slotIndex: photoCount, scale, offsetX: 0, offsetY }
+            { img, slotIndex: photoCount, scale, offsetX: 0, offsetY, filter}
         ]);
 
         setCanTakePhoto(true);
